@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 import travelplantwo.RecommendationApplication;
-import travelplantwo.domain.RecommendationCreated;
 
 @Entity
 @Table(name = "Recommendation_table")
@@ -23,14 +22,6 @@ public class Recommendation {
     private String contents;
 
     private String type;
-
-    @PostPersist
-    public void onPostPersist() {
-        RecommendationCreated recommendationCreated = new RecommendationCreated(
-            this
-        );
-        recommendationCreated.publishAfterCommit();
-    }
 
     public static RecommendationRepository repository() {
         RecommendationRepository recommendationRepository = RecommendationApplication.applicationContext.getBean(

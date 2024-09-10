@@ -36,13 +36,13 @@
                 <v-list>
                     <v-list-item
                         class="px-2"
-                        key="plans"
-                        to="/plans/plans"
+                        key=""
+                        to="//"
                         @click="changeUrl()"
                         color="primary"
                         style="font-weight:700;"
                     >
-                        Plan
+                        
                     </v-list-item>
 
 
@@ -185,10 +185,10 @@ export default {
         ImageUrl: '',
         aggregate: [
             { 
-                title: 'Plan', 
+                title: '', 
                 description: '', 
-                key: 'plans', 
-                route: '/plans/plans',
+                key: '', 
+                route: '//',
                 ImageUrl: '',
             },
             { 

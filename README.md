@@ -37,7 +37,7 @@ mvn spring-boot:run
 ## Test by API
 - plan
 ```
- http :8088/plans id="id" memberId="memberId" location="location" startDay="startDay" endDay="endDay" budget="budget" groupSize="groupSize" details="details" 
+ http :8088/ 
 ```
 - member
 ```
