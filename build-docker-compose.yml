@@ -45,7 +45,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     command: mvn spring-boot:run
     ports:
-      - 8083:8083
+      - 0:0
     working_dir: /usr/src
     volumes:
       - ./member:/usr/src
@@ -59,7 +59,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     command: mvn spring-boot:run
     ports:
-      - 8084:8084
+      - 0:0
     working_dir: /usr/src
     volumes:
       - ./notification:/usr/src
@@ -73,7 +73,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     command: mvn spring-boot:run
     ports:
-      - 8085:8085
+      - 0:0
     working_dir: /usr/src
     volumes:
       - ./follow:/usr/src
@@ -87,7 +87,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     command: mvn spring-boot:run
     ports:
-      - 8086:8086
+      - 0:0
     working_dir: /usr/src
     volumes:
       - ./recommendation:/usr/src
@@ -101,7 +101,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     command: mvn spring-boot:run
     ports:
-      - 8087:8087
+      - 0:0
     working_dir: /usr/src
     volumes:
       - ./like:/usr/src
