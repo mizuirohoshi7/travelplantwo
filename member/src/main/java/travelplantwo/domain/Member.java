@@ -25,6 +25,26 @@ public class Member {
 
     private Integer tokenAmount;
 
+    @PostPersist
+    public void onPostPersist() {
+        MemberCreated memberCreated = new MemberCreated(this);
+        memberCreated.publishAfterCommit();
+
+        TokenDecreased tokenDecreased = new TokenDecreased(this);
+        tokenDecreased.publishAfterCommit();
+
+        TokenDecreasingFailed tokenDecreasingFailed = new TokenDecreasingFailed(
+            this
+        );
+        tokenDecreasingFailed.publishAfterCommit();
+    }
+
+    @PostUpdate
+    public void onPostUpdate() {
+        TokenIncreased tokenIncreased = new TokenIncreased(this);
+        tokenIncreased.publishAfterCommit();
+    }
+
     public static MemberRepository repository() {
         MemberRepository memberRepository = MemberApplication.applicationContext.getBean(
             MemberRepository.class
@@ -36,33 +56,18 @@ public class Member {
     public static void decreaseToken(
         RecommendationRequired recommendationRequired
     ) {
-        //implement business logic here:
+        Member member = repository().findById(recommendationRequired.getMemberId()).get();
+        int currentToken = member.getTokenAmount();
+        int requiredToken = 100; // 요구양에 따라 변화 필요
 
-        /** Example 1:  new item 
-        Member member = new Member();
-        repository().save(member);
-
-        TokenDecreased tokenDecreased = new TokenDecreased(member);
-        tokenDecreased.publishAfterCommit();
-        TokenDecreasingFailed tokenDecreasingFailed = new TokenDecreasingFailed(member);
-        tokenDecreasingFailed.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(recommendationRequired.get???()).ifPresent(member->{
-            
-            member // do something
-            repository().save(member);
-
+        if (currentToken >= requiredToken) {
+            member.setTokenAmount(currentToken - requiredToken);
             TokenDecreased tokenDecreased = new TokenDecreased(member);
             tokenDecreased.publishAfterCommit();
+        } else {
             TokenDecreasingFailed tokenDecreasingFailed = new TokenDecreasingFailed(member);
             tokenDecreasingFailed.publishAfterCommit();
-
-         });
-        */
-
+        }
     }
     //>>> Clean Arch / Port Method
 

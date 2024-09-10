@@ -46,28 +46,6 @@ public class Recommendation {
 
     //<<< Clean Arch / Port Method
     public static void createRecommendation(TokenDecreased tokenDecreased) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Recommendation recommendation = new Recommendation();
-        repository().save(recommendation);
-
-        RecommendationCreated recommendationCreated = new RecommendationCreated(recommendation);
-        recommendationCreated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(tokenDecreased.get???()).ifPresent(recommendation->{
-            
-            recommendation // do something
-            repository().save(recommendation);
-
-            RecommendationCreated recommendationCreated = new RecommendationCreated(recommendation);
-            recommendationCreated.publishAfterCommit();
-
-         });
-        */
 
     }
     //>>> Clean Arch / Port Method

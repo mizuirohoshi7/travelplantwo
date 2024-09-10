@@ -23,7 +23,7 @@ public class RecommendationController {
     @RequestMapping(value = "/recommendations/{id}//require",
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8")
-    public Recommendation requireRecommendation(@PathVariable(value = "id")  id, @RequestBody RequireRecommendationCommand requireRecommendationCommand, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Recommendation requireRecommendation(@PathVariable(value = "id") Long id, @RequestBody RequireRecommendationCommand requireRecommendationCommand, HttpServletRequest request, HttpServletResponse response) throws Exception {
             System.out.println("##### /recommendation/requireRecommendation  called #####");
             Optional<Recommendation> optionalRecommendation = recommendationRepository.findById(id);
             

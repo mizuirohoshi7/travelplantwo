@@ -6,5 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 //<<< PoEAA / Repository
 @RepositoryRestResource(collectionResourceRel="follows", path="follows")
-public interface FollowRepository extends PagingAndSortingRepository<Follow, >{
+public interface FollowRepository extends PagingAndSortingRepository<Follow, Long>{
 }

@@ -6,5 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 //<<< PoEAA / Repository
 @RepositoryRestResource(collectionResourceRel="likes", path="likes")
-public interface LikeRepository extends PagingAndSortingRepository<Like, >{
+public interface LikeRepository extends PagingAndSortingRepository<Like, Long>{
 }
