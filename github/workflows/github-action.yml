@@ -1,0 +1,98 @@
+name: github-action
+run-name: ${{ github.actor }} is out building GitHub Actions
+
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '**' 
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build Maven Projects
+        run: |
+          mvn clean package -f ./plan/pom.xml
+          mvn clean package -f ./member/pom.xml
+          mvn clean package -f ./notification/pom.xml
+          mvn clean package -f ./follow/pom.xml
+          mvn clean package -f ./recommendation/pom.xml
+          mvn clean package -f ./like/pom.xml
+
+      - name: Docker Build and push for Plan
+        uses: docker/build-push-action@v4
+        with:
+          context: ./plan
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/plan:latest
+            ghcr.io/${{ github.repository }}/plan:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Member
+        uses: docker/build-push-action@v4
+        with:
+          context: ./member
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/member:latest
+            ghcr.io/${{ github.repository }}/member:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Notification
+        uses: docker/build-push-action@v4
+        with:
+          context: ./notification
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/notification:latest
+            ghcr.io/${{ github.repository }}/notification:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Follow
+        uses: docker/build-push-action@v4
+        with:
+          context: ./follow
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/follow:latest
+            ghcr.io/${{ github.repository }}/follow:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Recommendation
+        uses: docker/build-push-action@v4
+        with:
+          context: ./recommendation
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/recommendation:latest
+            ghcr.io/${{ github.repository }}/recommendation:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Like
+        uses: docker/build-push-action@v4
+        with:
+          context: ./like
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/like:latest
+            ghcr.io/${{ github.repository }}/like:${{ github.ref_name }}
+            
