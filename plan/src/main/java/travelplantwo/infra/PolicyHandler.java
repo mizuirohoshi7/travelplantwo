@@ -18,7 +18,7 @@ import travelplantwo.domain.*;
 public class PolicyHandler {
 
     @Autowired
-    Repository Repository;
+    PlanRepository planRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}

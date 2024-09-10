@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 import travelplantwo.LikeApplication;
+import travelplantwo.domain.LikeCreated;
+import travelplantwo.domain.LikeDeleted;
 
 @Entity
 @Table(name = "Like_table")
@@ -20,6 +22,18 @@ public class Like {
     private Long memberId;
 
     private Long recommendationId;
+
+    @PostPersist
+    public void onPostPersist() {
+        LikeCreated likeCreated = new LikeCreated(this);
+        likeCreated.publishAfterCommit();
+
+        LikeDeleted likeDeleted = new LikeDeleted(this);
+        likeDeleted.publishAfterCommit();
+    }
+
+    @PreRemove
+    public void onPreRemove() {}
 
     public static LikeRepository repository() {
         LikeRepository likeRepository = LikeApplication.applicationContext.getBean(

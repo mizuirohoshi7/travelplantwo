@@ -5,8 +5,8 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
+import PlanPlanManager from "./components/listers/PlanPlanCards"
+import PlanPlanDetail from "./components/listers/PlanPlanDetail"
 
 import MemberMemberManager from "./components/listers/MemberMemberCards"
 import MemberMemberDetail from "./components/listers/MemberMemberDetail"
@@ -29,14 +29,14 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [
             {
-                path: '//',
-                name: 'Manager',
-                component: Manager
+                path: '/plans/plans',
+                name: 'PlanPlanManager',
+                component: PlanPlanManager
             },
             {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
+                path: '/plans/plans/:id',
+                name: 'PlanPlanDetail',
+                component: PlanPlanDetail
             },
 
             {

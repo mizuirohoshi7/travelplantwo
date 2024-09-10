@@ -12,25 +12,25 @@ spring:
         - id: plan
           uri: http://localhost:8082
           predicates:
-            - Path=/undefined/**, 
+            - Path=/plans/**, 
         - id: member
-          uri: http://localhost:0
+          uri: http://localhost:8083
           predicates:
             - Path=/members/**, 
         - id: notification
-          uri: http://localhost:0
+          uri: http://localhost:8084
           predicates:
             - Path=/notifications/**, 
         - id: follow
-          uri: http://localhost:0
+          uri: http://localhost:8085
           predicates:
             - Path=/follows/**, 
         - id: recommendation
-          uri: http://localhost:0
+          uri: http://localhost:8086
           predicates:
             - Path=/recommendations/**, 
         - id: like
-          uri: http://localhost:0
+          uri: http://localhost:8087
           predicates:
             - Path=/likes/**, 
         - id: frontend
@@ -60,7 +60,7 @@ spring:
         - id: plan
           uri: http://plan:8080
           predicates:
-            - Path=/undefined/**, 
+            - Path=/plans/**, 
         - id: member
           uri: http://member:8080
           predicates:

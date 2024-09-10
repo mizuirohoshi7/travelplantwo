@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 import travelplantwo.PlanApplication;
+import travelplantwo.domain.PlanCreated;
+import travelplantwo.domain.PlanDeleted;
+import travelplantwo.domain.PlanUpdated;
 
 @Entity
 @Table(name = "Plan_table")
@@ -30,6 +33,24 @@ public class Plan {
     private Integer groupSize;
 
     private String details;
+
+    @PostPersist
+    public void onPostPersist() {
+        PlanCreated planCreated = new PlanCreated(this);
+        planCreated.publishAfterCommit();
+    }
+
+    @PostUpdate
+    public void onPostUpdate() {
+        PlanUpdated planUpdated = new PlanUpdated(this);
+        planUpdated.publishAfterCommit();
+    }
+
+    @PreRemove
+    public void onPreRemove() {
+        PlanDeleted planDeleted = new PlanDeleted(this);
+        planDeleted.publishAfterCommit();
+    }
 
     public static PlanRepository repository() {
         PlanRepository planRepository = PlanApplication.applicationContext.getBean(
